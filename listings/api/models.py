@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
@@ -19,6 +20,7 @@ class Home(TimeStampedModel):
         (Apartment, "Apartment"),
     ]
 
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, db_index=True, primary_key=True)
     num_bathrooms = models.FloatField(null=True, blank=True)
     num_bedrooms = models.IntegerField(null=True, blank=True)
     home_size = models.IntegerField(null=True, blank=True)

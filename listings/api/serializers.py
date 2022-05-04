@@ -1,4 +1,8 @@
-from django.contrib.auth.models import User, Group
+from api.models import Home
 from rest_framework import serializers
 
-# TODO: Create your serializers here.
+
+class HomeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Home
+        fields = '__all__'
