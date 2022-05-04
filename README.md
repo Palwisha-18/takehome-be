@@ -68,27 +68,60 @@ Provide a link to the source so we can see the original work and any modificatio
 
 
 # Your Notes
-*TODO: Add your documentation here* 
 
 ## Time Spent
-*Give us a rough estimate of the time you spent working on this. If you spent time learning in order to do this project please feel free to let us know that too.*
-*This makes sure that we are evaluating your work fairly and in context. It also gives us the opportunity to learn and adjust our process if needed.*
+Approximately 2.5 hours were spent on the completion of this project. Time break w.r.t the subtask:
+
+Subtask | Restructing repo and Dockerizing | Analysing data, creating Home model and implementing import_house_data.py | Adding Serizalizer and Views for Listing homes and performing CRUD operations on Home model | Adding Unittests | Documentation 
+--- | --- | --- | --- |--- |--- 
+Hours spent | 0.5 | 0.75 | 0.5 | 0.25 | 0.5 
 
 ## Assumptions
-*Did you find yourself needing to make assumptions to finish this?*
-*If so, what were they and how did they impact your design/code?*
-
+* Since the task requirement and project was initially setup for read-only users, listing homes and retrieving a single home features work fine.
+Create, Update and Delete operations are added but doesn't work as it would require setting up authentication process.
+* Zillow data's relation to each home was unclear (for example, is zillow id always unique for each house?), therefore, a single model was created.
+* As the code could be made production ready, instead of using virtual environment, the repository is restructured and dockerized.
+* PostGIS database is used to enable adding any spatial data about homes in future.
 
 ## Next Steps
-*Provide us with some notes about what you would do next if you had more time.* 
-*Are there additional features that you would want to add? Specific improvements to your code you would make?*
+
 ### Features
+* Setting authentication and authorization process to allow users to perform complete CRUD operations on home.
+* Update model to include validations on some fields like year_built, tax_year, num_bathrooms and num_bedrooms.
+* Update List API to enhance filtering options. For instance, users should be able to search according to range of prices, year_built as well by address.
+* Autocomplete address feature can be added for searching by address
+* Add pagination to List API endpoint to limit the number of results per page
 
 ### Testing
-
-### Anything else needed to make this production ready?
-
+* Add tests for all crud operations and cover more scenarios
+* Integrate CircleCI for running tests
 
 ## How to Use
-*Provide any end user documentation you think is necessary and useful here*
 
+### Project Setup
+1. Follow the instructions on https://docs.docker.com/install/ to install docker
+2. Follow the instructions on https://docs.docker.com/compose/install/ to install docker compose
+3. Create a `.env` file under *listings* directory and copy the contents from `.env.sample` in it. Contact the developer for credentials.
+4. From the project root, run the following command to start the application server: 
+        `sudo docker-compose up --build`
+5. docker-compose will run entrypoint.sh that handles model migrations as well as running `import_house_data` script to populate `Home` table using `sample-data/data.csv` 
+6. The app will run locally at http://127.0.0.1:8001
+
+### Interacting with API endpoints
+In your browser, try the following URLs:
+#### List All Homes
+GET `http://127.0.0.1:8001/api/list-all-homes/`
+
+#### Filter Homes by home_type, state, zipcode, num_bathrooms, num_bedrooms 
+Listing all `MultiFamily2To4` type homes
+
+GET `http://127.0.0.1:8001/api/list-all-homes/?home_type=MultiFamily2To4&state=&zipcode=&num_bathrooms=&num_bedrooms=`
+
+#### Retrieve a Home instance
+GET `http://127.0.0.1:8001/api/<home_uuid>/`
+
+### Running Unittests
+While the docker container is running, in a new terminal try the following:
+
+* `docker exec -it listings-backend /bin/sh`
+* `python manage.py test api.tests`
