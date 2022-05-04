@@ -9,5 +9,5 @@ urlpatterns = [
     path('auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('add-home/', HomeCreateView.as_view(), name='add-home'),
     path('list-all-homes/', HomeListView.as_view(), name='home-list'),
-    path('<str:uuid>/', HomeRetrieveUpdateDestroyView.as_view(), name='retrieve-update-delete-home'),
+    path('home/<str:uuid>/', HomeRetrieveUpdateDestroyView.as_view(), name='retrieve-update-delete-home'),
 ]

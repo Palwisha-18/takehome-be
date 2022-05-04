@@ -70,9 +70,9 @@ Provide a link to the source so we can see the original work and any modificatio
 # Your Notes
 
 ## Time Spent
-Approximately 2.5 hours were spent on the completion of this project. Time break w.r.t the subtask:
+Approximately 2.5 hours were spent on the completion of this project. Time breakdown w.r.t the subtask:
 
-Subtask | Restructing repo and Dockerizing | Analysing data, creating Home model and implementing import_house_data.py | Adding Serizalizer and Views for Listing homes and performing CRUD operations on Home model | Adding Unittests | Documentation 
+Subtask | Restructuring repo and Dockerizing | Analysing data, creating Home model and implementing import_house_data.py | Adding Serizalizer and Views for Listing homes and performing CRUD operations on Home model | Adding Unittests | Documentation 
 --- | --- | --- | --- |--- |--- 
 Hours spent | 0.5 | 0.75 | 0.5 | 0.25 | 0.5 
 
@@ -86,14 +86,14 @@ Create, Update and Delete operations are added but doesn't work as it would requ
 ## Next Steps
 
 ### Features
-* Setting authentication and authorization process to allow users to perform complete CRUD operations on home.
+* Setting authentication and authorization process to allow users to perform complete CRUD operations on home instances.
 * Update model to include validations on some fields like year_built, tax_year, num_bathrooms and num_bedrooms.
 * Update List API to enhance filtering options. For instance, users should be able to search according to range of prices, year_built as well by address.
 * Autocomplete address feature can be added for searching by address
 * Add pagination to List API endpoint to limit the number of results per page
 
 ### Testing
-* Add tests for all crud operations and cover more scenarios
+* Add tests for all crud operations and cover more scenarios for each endpoint
 * Integrate CircleCI for running tests
 
 ## How to Use
@@ -118,7 +118,11 @@ Listing all `MultiFamily2To4` type homes
 GET `http://127.0.0.1:8001/api/list-all-homes/?home_type=MultiFamily2To4&state=&zipcode=&num_bathrooms=&num_bedrooms=`
 
 #### Retrieve a Home instance
-GET `http://127.0.0.1:8001/api/<home_uuid>/`
+From the list API results, take uuid of any home instance and replace in the following URL:
+
+GET `http://127.0.0.1:8001/api/home/<home_uuid>/`
+
+It should return the same home instance as available in the List API results
 
 ### Running Unittests
 While the docker container is running, in a new terminal try the following:
