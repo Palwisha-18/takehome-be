@@ -102,7 +102,7 @@ Create, Update and Delete operations are added but doesn't work as it would requ
 1. Follow the instructions on https://docs.docker.com/install/ to install docker
 2. Follow the instructions on https://docs.docker.com/compose/install/ to install docker compose
 3. Create a `.env` file under *listings* directory and copy the contents from `.env.sample` in it. Contact the developer for credentials.
-4. From the project root, `cd listings`, run the following command to start the application server: 
+4. From the project root, `cd listings` and run the following command to start the application server: 
         `sudo docker-compose up --build`
 5. docker-compose will run entrypoint.sh that handles model migrations as well as running `import_house_data` script to populate `Home` table using `sample-data/data.csv` 
 6. The app will run locally at http://127.0.0.1:8001
